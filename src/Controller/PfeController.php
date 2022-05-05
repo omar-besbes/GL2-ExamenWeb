@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Entreprise;
 use App\Entity\PFE;
 use App\Form\PFEType;
 use App\Repository\EntrepriseRepository;
@@ -29,24 +28,25 @@ class PfeController extends AbstractController
 		$this->manager = $doctrine->getManager();
 	}
 
-    #[Route('/pfe', name: 'app_pfe')]
-    public function index(PFE $pfe): Response
-    {
-        return $this->render('pfe/index.html.twig', [
-            'controller_name' => 'PfeController',
+	#[Route('/pfe', name: 'app_pfe')]
+	public function index(PFE $pfe): Response
+	{
+		return $this->render('pfe/index.html.twig', [
+			'controller_name' => 'PfeController',
 			'pfe' => $pfe
-        ]);
-    }
+		]);
+	}
 
 	public function addPfe(Request $request, $entreprise): Response
 	{
 		$e = $this->repositoryE->findOneBy(['id' => $entreprise]);
 
 		$pfe = new PFE();
+		$pfe->setEntreprise($e);
 		$form = $this->createForm(PFEType::class, $pfe);
 
 		$form->handleRequest($request);
-		if($form->isSubmitted() && $form->isValid()) {
+		if ($form->isSubmitted() && $form->isValid()) {
 			$pfe = $form->getData();
 			$e->addPFE($pfe);
 			$this->addFlash('success', 'Form submitted successfully');
