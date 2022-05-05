@@ -48,8 +48,10 @@
                     </div>
 
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item">nombre : </li>
                         {% for pfe in e.pfes %}
                         <li class="list-group-item">PFE : {{ pfe.titre }}</li>
+                        {% endfor %}
                     </ul>
                 </div>
             {% endfor %}

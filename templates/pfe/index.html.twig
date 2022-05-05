@@ -9,12 +9,11 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <div class="card m-2">
+        <div class="card-body">
+            <h5 class="card-title">{{ pfe.title }}</h5>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Omar Besbes/PhpstormProjects/INSAT/examenWeb/src/Controller/PfeController.php'|file_link(0) }}">src/Controller/PfeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Omar Besbes/PhpstormProjects/INSAT/examenWeb/templates/pfe/index.html.twig'|file_link(0) }}">templates/pfe/index.html.twig</a></code></li>
-    </ul>
 </div>
 {% endblock %}

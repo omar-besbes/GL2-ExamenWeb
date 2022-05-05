@@ -30,10 +30,11 @@ class PfeController extends AbstractController
 	}
 
     #[Route('/pfe', name: 'app_pfe')]
-    public function index(): Response
+    public function index(PFE $pfe): Response
     {
         return $this->render('pfe/index.html.twig', [
             'controller_name' => 'PfeController',
+			'pfe' => $pfe
         ]);
     }
 
@@ -49,7 +50,7 @@ class PfeController extends AbstractController
 			$pfe = $form->getData();
 			$e->addPFE($pfe);
 			$this->addFlash('success', 'Form submitted successfully');
-			return $this->redirectToRoute('app_pfe');
+			return $this->redirectToRoute('app_pfe', ['pfe' => $pfe]);
 		}
 
 		return $this->renderForm('pfe/form.html.twig', [
