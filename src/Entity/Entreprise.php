@@ -39,7 +39,7 @@ class Entreprise
         return $this->pfes;
     }
 
-    public function addDesignation(PFE $designation): self
+    public function addPFE(PFE $designation): self
     {
         if (!$this->pfes->contains($designation)) {
             $this->pfes[] = $designation;
@@ -49,7 +49,7 @@ class Entreprise
         return $this;
     }
 
-    public function removeDesignation(PFE $designation): self
+    public function removePFE(PFE $designation): self
     {
         if ($this->pfes->removeElement($designation)) {
             // set the owning side to null (unless already changed)

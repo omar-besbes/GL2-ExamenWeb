@@ -5,3 +5,7 @@ controllers:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+add_pfe:
+    path: /pfe/add/{entreprise}
+    controller: App\Controller\PfeController::addPfe
