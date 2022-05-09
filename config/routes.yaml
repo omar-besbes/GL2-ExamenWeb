@@ -9,3 +9,17 @@ kernel:
 add_pfe:
     path: /pfe/add/
     controller: App\Controller\PfeController::addPfe
+
+app_pfe:
+    path: /pfe
+    controller: App\Controller\PfeController::index
+
+show_pfe:
+    path: /pfe/{id}
+    controller: App\Controller\PfeController::show
+    requirements:
+        id: \d+
+
+app_entreprise:
+    path: /entreprise
+    controller: App\Controller\EntrepriseController::index

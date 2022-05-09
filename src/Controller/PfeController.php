@@ -28,10 +28,18 @@ class PfeController extends AbstractController
 		$this->manager = $doctrine->getManager();
 	}
 
-	#[Route('/pfe', name: 'app_pfe')]
-	public function index(PFE $pfe): Response
+	public function index(): Response
 	{
+		$pfes = $this->repository->findAll();
 		return $this->render('pfe/index.html.twig', [
+			'controller_name' => 'PfeController',
+			'pfes' => $pfes
+		]);
+	}
+
+	public function show(PFE $pfe): Response
+	{
+		return $this->render('pfe/show.html.twig', [
 			'controller_name' => 'PfeController',
 			'pfe' => $pfe
 		]);
@@ -53,7 +61,7 @@ class PfeController extends AbstractController
 
 			$this->manager->flush();
 			$this->addFlash('success', 'Form submitted successfully');
-			return $this->redirectToRoute('app_pfe', ['pfe' => $pfe]);
+			return $this->redirectToRoute('show_pfe', ['pfe' => $pfe]);
 		}
 
 		return $this->renderForm('pfe/form.html.twig', [

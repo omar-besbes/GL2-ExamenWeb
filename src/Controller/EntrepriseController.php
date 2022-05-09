@@ -13,7 +13,6 @@ class EntrepriseController extends AbstractController
 
 	public function __construct(private EntrepriseRepository $repository) {}
 
-	#[Route('/entreprise', name: 'app_entreprise')]
 	public function index(): Response
 	{
 		$entreprises = $this->repository->getAllwithPFEcount();
