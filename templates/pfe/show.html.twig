@@ -28,6 +28,16 @@
 {% endblock %}
 
 {% block body %}
+
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+            {#            {{ app.session.flash(label) }} #}
+        {% endfor %}
+    {% endfor %}
+
     <div class="card m-2">
         <div class="card-header">
             <h5 class="card-title">

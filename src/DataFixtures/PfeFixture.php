@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Entreprise;
 use App\Entity\PFE;
 use App\Repository\EntrepriseRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
