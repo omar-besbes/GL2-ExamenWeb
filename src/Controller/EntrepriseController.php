@@ -16,7 +16,7 @@ class EntrepriseController extends AbstractController
 	#[Route('/entreprise', name: 'app_entreprise')]
 	public function index(): Response
 	{
-		$entreprises = $this->repository->getAll();
+		$entreprises = $this->repository->getAllwithPFEcount();
 		return $this->render('entreprise/index.html.twig', [
 			'controller_name' => 'EntrepriseController',
 			'entreprises' => $entreprises

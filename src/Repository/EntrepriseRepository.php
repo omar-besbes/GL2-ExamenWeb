@@ -17,42 +17,48 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class EntrepriseRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Entreprise::class);
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function add(Entreprise $entity, bool $flush = false): void
-    {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(Entreprise $entity, bool $flush = false): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
-
-	public function getAll(): array
+	public function __construct(ManagerRegistry $registry)
 	{
-		return $this->createQueryBuilder('e')
-            ->orderBy('e.id', 'ASC')
-            ->getQuery()
-            ->getResult()
-        ;
+		parent::__construct($registry, Entreprise::class);
+	}
+
+	/**
+	 * @throws ORMException
+	 * @throws OptimisticLockException
+	 */
+	public function add(Entreprise $entity, bool $flush = false): void
+	{
+		$this->_em->persist($entity);
+		if ($flush) {
+			$this->_em->flush();
+		}
+	}
+
+	/**
+	 * @throws ORMException
+	 * @throws OptimisticLockException
+	 */
+	public function remove(Entreprise $entity, bool $flush = false): void
+	{
+		$this->_em->remove($entity);
+		if ($flush) {
+			$this->_em->flush();
+		}
+	}
+
+	public function getAllwithPFEcount(): array
+	{
+		$query = $this->_em->createQuery('
+		SELECT e, COUNT(p.id)
+		FROM App\Entity\Entreprise e 
+			JOIN App\Entity\PFE p
+			WITH p.entreprise = e.id
+		GROUP BY e.id
+		ORDER BY e.id');
+
+		// le mot clé on pour les jointures devient with en dql
+
+		return $query->getResult();
 	}
 
 //    /**

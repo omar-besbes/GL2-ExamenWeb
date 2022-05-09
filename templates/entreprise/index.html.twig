@@ -44,10 +44,10 @@
             {% for e in entreprises %}
                 <div class="card m-2 {{ cycle(['bg-secondary', 'bg-success'], loop.index0) }}">
                    <div class="card-header">
-                       <h5 class="card-title">{{ e.designation|title }}</h5>
+                       <h5 class="card-title">{{ attribute(e, 0).designation|title }}</h5>
                    </div>
                     <div class="card-body">
-                        <div class="card-text"> Nombre de PFEs : <strong> {{ e.getPfes.count }} </strong> </div>
+                        <div class="card-text"> Nombre de PFEs : <strong> {{ e[1] }} </strong> </div>
                     </div>
 
 {#                    <ul class="list-group list-group-flush">#}
