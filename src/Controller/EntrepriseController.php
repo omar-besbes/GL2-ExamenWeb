@@ -11,16 +11,15 @@ class EntrepriseController extends AbstractController
 {
 
 
-	public function __construct(private EntrepriseRepository $repository)
-	{
-	}
+	public function __construct(private EntrepriseRepository $repository) {}
 
 	#[Route('/entreprise', name: 'app_entreprise')]
 	public function index(): Response
 	{
+		$entreprises = $this->repository->getAll();
 		return $this->render('entreprise/index.html.twig', [
 			'controller_name' => 'EntrepriseController',
-			'entreprises' => $this->repository->findAll()
+			'entreprises' => $entreprises
 		]);
 	}
 }

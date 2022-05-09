@@ -15,6 +15,7 @@ class PFEType extends AbstractType
 		$builder
 			->add('titre')
 			->add('etudiant')
+			->add('entreprise')
 			->add('add', SubmitType::class);
 	}
 

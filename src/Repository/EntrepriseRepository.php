@@ -13,7 +13,6 @@ use Doctrine\Persistence\ManagerRegistry;
  *
  * @method Entreprise|null find($id, $lockMode = null, $lockVersion = null)
  * @method Entreprise|null findOneBy(array $criteria, array $orderBy = null)
- * @method Entreprise[]    findAll()
  * @method Entreprise[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class EntrepriseRepository extends ServiceEntityRepository
@@ -46,6 +45,15 @@ class EntrepriseRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
+
+	public function getAll(): array
+	{
+		return $this->createQueryBuilder('e')
+            ->orderBy('e.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+	}
 
 //    /**
 //     * @return Entreprise[] Returns an array of Entreprise objects

@@ -6,9 +6,10 @@ use App\Entity\Entreprise;
 use App\Entity\PFE;
 use App\Repository\EntrepriseRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class PfeFixture extends Fixture
+class PfeFixture extends Fixture implements DependentFixtureInterface
 {
 
 
@@ -30,4 +31,12 @@ class PfeFixture extends Fixture
 
         $manager->flush();
     }
+
+
+	public function getDependencies(): array
+	{
+		return [
+			EntrepriseFixture::class
+		];
+	}
 }

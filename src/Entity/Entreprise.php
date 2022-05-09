@@ -39,22 +39,22 @@ class Entreprise
         return $this->pfes;
     }
 
-    public function addPFE(PFE $designation): self
+    public function addPFE(PFE $pfe): self
     {
-        if (!$this->pfes->contains($designation)) {
-            $this->pfes[] = $designation;
-            $designation->setEntreprise($this);
+        if (!$this->pfes->contains($pfe)) {
+            $this->pfes[] = $pfe;
+            $pfe->setEntreprise($this);
         }
 
         return $this;
     }
 
-    public function removePFE(PFE $designation): self
+    public function removePFE(PFE $pfe): self
     {
-        if ($this->pfes->removeElement($designation)) {
+        if ($this->pfes->removeElement($pfe)) {
             // set the owning side to null (unless already changed)
-            if ($designation->getEntreprise() === $this) {
-                $designation->setEntreprise(null);
+            if ($pfe->getEntreprise() === $this) {
+                $pfe->setEntreprise(null);
             }
         }
 
@@ -69,7 +69,12 @@ class Entreprise
     public function setDesignation(string $designation): self
     {
         $this->designation = $designation;
-
         return $this;
     }
+
+	public function __toString(): string
+	{
+		return $this->getDesignation();
+	}
+
 }

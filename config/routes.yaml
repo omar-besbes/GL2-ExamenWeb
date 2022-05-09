@@ -7,5 +7,5 @@ kernel:
     type: annotation
 
 add_pfe:
-    path: /pfe/add/{entreprise}
+    path: /pfe/add/
     controller: App\Controller\PfeController::addPfe

@@ -37,22 +37,25 @@
 
     <div>
         <div class="card-title">
-            <h1>Hello {{ controller_name }}</h1>
+            <h1> Nombres de PFEs par Entreprise : </h1>
         </div>
 
         <section class="card-body row row-cols-md-4 row-cols-3 g-0">
             {% for e in entreprises %}
-                <div class="card m-2">
+                <div class="card m-2 {{ cycle(['bg-secondary', 'bg-success'], loop.index0) }}">
+                   <div class="card-header">
+                       <h5 class="card-title">{{ e.designation|title }}</h5>
+                   </div>
                     <div class="card-body">
-                        <h5 class="card-title">{{ e.designation|title }}</h5>
+                        <div class="card-text"> Nombre de PFEs : <strong> {{ e.getPfes.count }} </strong> </div>
                     </div>
 
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">nombre : </li>
-                        {% for pfe in e.pfes %}
-                        <li class="list-group-item">PFE : {{ pfe.titre }}</li>
-                        {% endfor %}
-                    </ul>
+{#                    <ul class="list-group list-group-flush">#}
+{#                        <li class="list-group-item">nombre : </li>#}
+{#                        {% for pfe in e.pfes %}#}
+{#                        <li class="list-group-item">PFE : {{ pfe.titre }}</li>#}
+{#                        {% endfor %}#}
+{#                    </ul>#}
                 </div>
             {% endfor %}
         </section>

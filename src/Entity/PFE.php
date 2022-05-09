@@ -19,7 +19,7 @@ class PFE
     #[ORM\Column(type: 'string', length: 100)]
     private $etudiant;
 
-    #[ORM\ManyToOne(targetEntity: Entreprise::class, inversedBy: 'designation')]
+    #[ORM\ManyToOne(targetEntity: Entreprise::class, inversedBy: 'pfes')]
     #[ORM\JoinColumn(nullable: false)]
     private $entreprise;
 
@@ -63,4 +63,10 @@ class PFE
 
         return $this;
     }
+
+	public function __toString(): string
+	{
+		return "Sujet " . $this->getTitre() . " réalisé par " . $this->getEtudiant() . " au sein de l'entreprise " . $this->getEntreprise();
+	}
+
 }

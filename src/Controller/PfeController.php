@@ -37,18 +37,21 @@ class PfeController extends AbstractController
 		]);
 	}
 
-	public function addPfe(Request $request, $entreprise): Response
+	public function addPfe(Request $request): Response
 	{
-		$e = $this->repositoryE->findOneBy(['id' => $entreprise]);
-
 		$pfe = new PFE();
-		$pfe->setEntreprise($e);
 		$form = $this->createForm(PFEType::class, $pfe);
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
+			// persistance de l'entreprise
+			$this->manager->persist($pfe->getEntreprise());
+
+			// persistance de pfe
 			$pfe = $form->getData();
-			$e->addPFE($pfe);
+			$this->manager->persist($pfe);
+
+			$this->manager->flush();
 			$this->addFlash('success', 'Form submitted successfully');
 			return $this->redirectToRoute('app_pfe', ['pfe' => $pfe]);
 		}
