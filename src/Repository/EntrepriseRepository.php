@@ -49,12 +49,12 @@ class EntrepriseRepository extends ServiceEntityRepository
 	public function getAllwithPFEcount(): array
 	{
 		$query = $this->_em->createQuery('
-		SELECT e, COUNT(p.id)
-		FROM App\Entity\Entreprise e 
-			JOIN App\Entity\PFE p
-			WITH p.entreprise = e.id
-		GROUP BY e.id
-		ORDER BY e.id');
+			SELECT e, COUNT(p.id)
+			FROM App\Entity\Entreprise e 
+				JOIN App\Entity\PFE p
+				WITH p.entreprise = e.id
+			GROUP BY e.id
+			ORDER BY e.id');
 
 		// le mot clé on pour les jointures devient with en dql
 

@@ -38,10 +38,10 @@
 
     <div>
         <div class="card-title">
-            <h1> Nombres de PFEs par Entreprise : </h1>
+            <h1> Toutes les PFEs Dans la Base de Données : </h1>
         </div>
 
-        <section class="card-body row row-cols-md-4 row-cols-3 g-0">
+        <section class="card-body row row-cols-md-6 row-cols-5 g-0">
             {% for pfe in pfes %}
                 <div class="card m-2 {{ cycle(['bg-secondary', 'bg-success'], loop.index0) }}">
                     <div class="card-header">
@@ -56,7 +56,7 @@
                             Etudiant : <strong> {{ pfe.etudiant }} </strong>
                         </li>
                         <li class="list-group-item card-text">
-                            Entreprise : {{ pfe.entreprise }}
+                            Entreprise : {{ pfe.designation }}
                         </li>
                     </ul>
                 </div>
