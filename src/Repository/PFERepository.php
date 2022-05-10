@@ -18,34 +18,52 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PFERepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, PFE::class);
-    }
+	public function __construct(ManagerRegistry $registry)
+	{
+		parent::__construct($registry, PFE::class);
+	}
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function add(PFE $entity, bool $flush = false): void
-    {
-        $this->_em->persist($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
+	/**
+	 * @throws ORMException
+	 * @throws OptimisticLockException
+	 */
+	public function add(PFE $entity, bool $flush = false): void
+	{
+		$this->_em->persist($entity);
+		if ($flush) {
+			$this->_em->flush();
+		}
+	}
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     */
-    public function remove(PFE $entity, bool $flush = false): void
-    {
-        $this->_em->remove($entity);
-        if ($flush) {
-            $this->_em->flush();
-        }
-    }
+	/**
+	 * @throws ORMException
+	 * @throws OptimisticLockException
+	 */
+	public function remove(PFE $entity, bool $flush = false): void
+	{
+		$this->_em->remove($entity);
+		if ($flush) {
+			$this->_em->flush();
+		}
+	}
+
+	public function getAll(): array
+	{
+		$query = $this->_em->createQuery('
+			SELECT 
+				p.id as id, 
+				p.titre as titre, 
+				p.etudiant as etudiant, 
+				e.designation as designation
+			FROM App\Entity\PFE p
+				JOIN App\Entity\Entreprise e
+				WITH p.entreprise = e.id
+			ORDER BY p.id');
+
+		// le mot clé on pour les jointures devient with en dql
+
+		return $query->getResult();
+	}
 
 //    /**
 //     * @return PFE[] Returns an array of PFE objects

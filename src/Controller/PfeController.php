@@ -28,7 +28,8 @@ class PfeController extends AbstractController
 
 	public function index(): Response
 	{
-		$pfes = $this->repository->findAll();
+		$pfes = $this->repository->getAll();
+		dump($pfes);
 		return $this->render('pfe/index.html.twig', [
 			'controller_name' => 'PfeController',
 			'pfes' => $pfes
